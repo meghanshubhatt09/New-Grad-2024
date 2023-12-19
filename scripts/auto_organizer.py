@@ -24,8 +24,7 @@ class READMEOrganizer:
         Extracts the date from a job line in the table.
         Returns a datetime object representing the date.
         """
-        date_match = re.search(r"\b(\d{1,2})/(\d{1,2})/(\d{4})\b", job_line)
-        if date_match:
+        if date_match := re.search(r"\b(\d{1,2})/(\d{1,2})/(\d{4})\b", job_line):
             date_str = f"{date_match.group(1)}/{date_match.group(2)}/{date_match.group(3)}"
             return datetime.strptime(date_str, "%m/%d/%Y").date()
         return None
@@ -39,8 +38,7 @@ class READMEOrganizer:
         valid_jobs = []
         invalid_jobs = []
         for job in jobs:
-            job_date = self.get_job_date(job)
-            if job_date:
+            if job_date := self.get_job_date(job):
                 valid_jobs.append((job_date, job))
             else:
                 invalid_jobs.append(job)
